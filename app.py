@@ -1,22 +1,16 @@
 import streamlit as st
 from PIL import Image
-
-# Import OCR functions
-from ocr_implementation import perform_ocr
+from model.ocr_implementation import perform_ocr 
 
 # Title of the web app
 st.title("OCR and Document Search Application")
 
-# Upload an image
+# Upload an image                         
 uploaded_image = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
-
-# Model selection for OCR
-ocr_model_choice = st.selectbox("Select OCR Model", ["easyocr", "tesseract"])
 
 if uploaded_image:
     # Step 2: Perform OCR on the image
-    image = Image.open(uploaded_image)
-    extracted_text = perform_ocr(uploaded_image, ocr_model=ocr_model_choice)
+    extracted_text = perform_ocr(uploaded_image)
     
     # Step 3: Display extracted text
     st.subheader("Extracted Text")
@@ -27,7 +21,7 @@ if uploaded_image:
 
     if search_keyword:
         # Perform search
-        search_results = [line for line in extracted_text.splitlines() if search_keyword in line]
+        search_results = [line for line in extracted_text.split('\n') if search_keyword.lower() in line.lower()]
         
         # Display search results
         st.subheader("Search Results")
