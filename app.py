@@ -84,5 +84,10 @@ if uploaded_image:
         search_result = search_keywords(extracted_text, keyword)
         st.write(f"Search Result: {search_result}")
 
+st.markdown("<hr>", unsafe_allow_html=True)
 # Add footer or copyright information
-st.write("© 2024 Developed by Syed Naqi Abbas")
+st.markdown("""
+<div style="text-align: center;">
+    <p style="color: grey;">© 2024 Developed by <strong>Syed Naqi Abbas</strong></p>
+</div>
+""", unsafe_allow_html=True)
