@@ -31,9 +31,15 @@ The application is deployed at: [LIVE URL HERE]
 -Upload images in popular formats like PNG, JPEG, JPG.
 
 -Choose between EasyOCR and Tesseract models for text extraction.
+
 -Extract text in both Hindi and English.
--Display extracted text in an easy-to-read format.
+
+-Once the text is extracted from the image, it is displayed clearly on the page for easy reading.
+
 -Search for specific keywords in the extracted text, with highlighted results.
--Download extracted text as a plain text file.
+
+-Download extracted text as a plain text file, making it easy to save or share.
+
 -Deployed online for public access.
+
 
