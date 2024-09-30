@@ -2,7 +2,7 @@ import streamlit as st
 from PIL import Image
 
 # Import OCR functions
-from model.ocr_implementation import ocr_image, extract_text_as_json
+from model.ocr_implementation import perform_text 
 
 # Title of the web app
 st.title("OCR and Document Search Application")
