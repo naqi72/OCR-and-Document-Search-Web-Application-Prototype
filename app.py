@@ -3,89 +3,76 @@ import easyocr
 import numpy as np
 from PIL import Image
 from transformers import pipeline
+import re  # For finding and highlighting keywords
 
-# Initialize the EasyOCR Reader to support Hindi and English text recognition
+# Load EasyOCR Reader for Hindi and English
 reader = easyocr.Reader(['hi', 'en'])
 
-# Initialize the Huggingface Transformers pipeline for Question Answering (QA)
-# Explicitly using PyTorch as the backend framework
+# Initialize Hugging Face Transformers question-answering pipeline
 qa_pipeline = pipeline('question-answering', model='distilbert-base-cased-distilled-squad', framework='pt')
 
-# Function to perform OCR (Optical Character Recognition) on the uploaded image
+# Function to perform OCR on the image
 def ocr_image(uploaded_image):
-    """
-    Extracts text from the uploaded image using EasyOCR.
-    
-    Parameters:
-    uploaded_image (UploadedImage): The image file uploaded by the user.
-
-    Returns:
-    str: Extracted text from the image as a single string.
-    """
-    # Convert the image into a NumPy array for processing
+    # Convert the uploaded image to a NumPy array
     image = Image.open(uploaded_image)
     image_np = np.array(image)
 
-    # Use EasyOCR to extract text from the image
+    # Perform OCR using EasyOCR
     result = reader.readtext(image_np, detail=0, paragraph=True)
-
-    # Join the list of extracted text elements into a single string
     return " ".join(result)
 
-# Function to search for a keyword in the extracted text using a Question-Answering (QA) pipeline
-def search_keywords(extracted_text, keyword):
-    """
-    Uses a pre-trained QA model to find the keyword's location in the extracted text.
+# Function to search for keywords and highlight them
+def highlight_keywords(text, keyword):
+    # Escape special characters in the keyword to prevent issues in regex
+    keyword_escaped = re.escape(keyword)
     
-    Parameters:
-    extracted_text (str): The text extracted from the image.
-    keyword (str): The keyword to search for within the text.
+    # Use regex to find and wrap the matching keyword with <mark> HTML tag
+    highlighted_text = re.sub(f"({keyword_escaped})", r'<mark>\1</mark>', text, flags=re.IGNORECASE)
+    
+    return highlighted_text
 
-    Returns:
-    str: The result from the QA model, which answers where the keyword is mentioned.
-    """
-    # Use the Huggingface QA pipeline to search for the keyword in the text
-    search_result = qa_pipeline({
-        'context': extracted_text,
-        'question': f"Where is {keyword} mentioned in the text?"
-    })
+# Streamlit Page Configuration
+st.set_page_config(page_title="OCR & NLP Web App", page_icon="📄", layout="centered")
 
-    # Return the answer provided by the QA model
-    return search_result['answer']
+# Title Section with Custom Styling
+st.markdown("<h1 style='text-align: center; color: #4CAF50;'>OCR & Keyword Search Web App</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: grey;'>Upload an image, extract text, and search for keywords with highlights</p>", unsafe_allow_html=True)
 
-# Streamlit Web Application UI
-st.title("OCR & Keyword Search Application using NLP")
-st.write("""
-    This application allows you to upload an image containing Hindi and/or English text.
-    It will extract the text using OCR and perform a keyword search using a Question-Answering model.
-""")
-
-# File uploader widget to upload an image (supports JPEG and PNG formats)
-uploaded_image = st.file_uploader("Upload an image (JPEG, PNG)", type=["jpg", "jpeg", "png"])
+# Upload Image Section
+st.markdown("### Upload an Image (JPEG, PNG)")
+uploaded_image = st.file_uploader("Drag and drop your file here", type=["jpg", "jpeg", "png"])
 
 if uploaded_image:
-    # Display the uploaded image
+    # Display the uploaded image with caption
     st.image(uploaded_image, caption='Uploaded Image', use_column_width=True)
 
-    # Perform OCR to extract text from the image
-    st.write("Extracting text from the image...")
-    extracted_text = ocr_image(uploaded_image)
+    # Add a progress spinner while extracting text
+    with st.spinner('Extracting text from the image...'):
+        extracted_text = ocr_image(uploaded_image)
 
-    # Display the extracted text
-    st.write("### Extracted Text")
-    st.write(extracted_text)
+    # Display the extracted text in an expander (collapsible section)
+    st.markdown("### Extracted Text")
+    with st.expander("Click to view the extracted text"):
+        st.write(extracted_text)
 
-    # Input box for the user to enter a keyword for searching in the extracted text
-    st.write("### Keyword Search in Extracted Text")
+    # Keyword Search Section
+    st.markdown("### Search for a Keyword in the Extracted Text")
     keyword = st.text_input("Enter a keyword to search:")
 
     if keyword:
-        # Perform keyword search using the QA model
-        search_result = search_keywords(extracted_text, keyword)
-        st.write(f"Search Result: {search_result}")
+        # Progress indicator while searching
+        with st.spinner(f'Searching for "{keyword}"...'):
+            # Highlight the keyword in the extracted text
+            highlighted_text = highlight_keywords(extracted_text, keyword)
+        
+        # Display the extracted text with highlighted keyword
+        st.markdown("### Search Results with Highlighted Keyword")
+        st.markdown(highlighted_text, unsafe_allow_html=True)
 
+# Add a horizontal line separator before footer
 st.markdown("<hr>", unsafe_allow_html=True)
-# Add footer or copyright information
+
+# Footer Section with Developer Information
 st.markdown("""
 <div style="text-align: center;">
     <p style="color: grey;">© 2024 Developed by <strong>Syed Naqi Abbas</strong></p>
