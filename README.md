@@ -42,7 +42,7 @@ The application is deployed at: [LIVE URL HERE]
 
 -Deployed online for public access.
 
-### 🌟 Tech Stack:
+###  Tech Stack:
 - **Streamlit**: Fast and modern web framework for creating data-driven apps.
  
 - **EasyOCR**: Optical Character Recognition library supporting multiple languages
