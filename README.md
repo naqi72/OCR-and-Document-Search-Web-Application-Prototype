@@ -29,6 +29,7 @@ The application is deployed at: [LIVE URL HERE]
 
 ## Features
 -Upload images in popular formats like PNG, JPEG, JPG.
+
 -Choose between EasyOCR and Tesseract models for text extraction.
 -Extract text in both Hindi and English.
 -Display extracted text in an easy-to-read format.
