@@ -42,4 +42,15 @@ The application is deployed at: [LIVE URL HERE]
 
 -Deployed online for public access.
 
+## Technologies Used
+
+- **Streamlit** for the web application interface.
+
+- **Pillow** for image handling.
+
+- **EasyOCR** and **Tesseract** for OCR functionality.
+
+
+
+
 
