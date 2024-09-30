@@ -42,13 +42,16 @@ The application is deployed at: [LIVE URL HERE]
 
 -Deployed online for public access.
 
-## Technologies Used
+### 🌟 Tech Stack:
+- **Streamlit**: Fast and modern web framework for creating data-driven apps.
+ 
+- **EasyOCR**: Optical Character Recognition library supporting multiple languages
 
-- **Streamlit** for the web application interface.
-
-- **Pillow** for image handling.
-
-- **EasyOCR** and **Tesseract** for OCR functionality.
+- **Huggingface Transformers**: Pre-trained models for NLP, specifically used here for keyword searches.
+ 
+- **Pillow**: Image processing capabilities to handle uploaded image files.
+ 
+- **NumPy**: For image conversion and array manipulation.
 
 
 
