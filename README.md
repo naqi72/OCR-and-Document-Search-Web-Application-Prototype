@@ -8,12 +8,10 @@
     
     ```
 
-2. Create a virtual environment and install dependencies:
-    ```
-    python -m venv venv
-    source venv/bin/activate   # On Windows use: venv\Scripts\activate
-    pip install -r requirements.txt
-    ```
+2. nstall the required dependencies
+  ```
+   pip install -r requirements.txt
+```
 
 3. Run the web application locally:
     ```
