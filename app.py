@@ -13,7 +13,6 @@ qa_pipeline = pipeline('question-answering', model='distilbert-base-cased-distil
 
 # Function to perform OCR on the image
 def ocr_image(uploaded_image):
-    # Convert the uploaded image to a NumPy array
     image = Image.open(uploaded_image)
     image_np = np.array(image)
 
@@ -23,10 +22,8 @@ def ocr_image(uploaded_image):
 
 # Function to search for keywords and highlight them
 def highlight_keywords(text, keyword):
-    # Escape special characters in the keyword to prevent issues in regex
     keyword_escaped = re.escape(keyword)
     
-    # Use regex to find and wrap the matching keyword with <mark> HTML tag
     highlighted_text = re.sub(f"({keyword_escaped})", r'<mark>\1</mark>', text, flags=re.IGNORECASE)
     
     return highlighted_text
@@ -58,7 +55,6 @@ if uploaded_image:
     # Keyword Search Section
     st.markdown("### Search for a Keyword in the Extracted Text")
     keyword = st.text_input("Enter a keyword to search:")
-
     if keyword:
         # Progress indicator while searching
         with st.spinner(f'Searching for "{keyword}"...'):
