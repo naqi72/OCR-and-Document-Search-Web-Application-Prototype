@@ -8,10 +8,11 @@
     
     ```
 
-2. nstall the required dependencies
-  ```
+2. Install the required dependencies
+   ```
    pip install -r requirements.txt
-```
+   
+   ```
 
 3. Run the web application locally:
     ```
