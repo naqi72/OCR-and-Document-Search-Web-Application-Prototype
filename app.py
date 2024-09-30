@@ -6,7 +6,7 @@ from transformers import pipeline
 import re  # For finding and highlighting keywords
 
 # Load EasyOCR Reader for Hindi and English
-reader = easyocr.Reader(['hi', 'en'])
+reader = easyocr.Reader(['hi', 'en'],gpu=False)
 
 # Initialize Hugging Face Transformers question-answering pipeline
 qa_pipeline = pipeline('question-answering', model='distilbert-base-cased-distilled-squad', framework='pt')
