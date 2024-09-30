@@ -5,6 +5,9 @@ from PIL import Image
 # Initialize EasyOCR for Hindi and English
 reader = easyocr.Reader(['hi', 'en'], gpu=False)
 
+
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'  # Windows
+
 # Function to perform OCR using Tesseract
 def ocr_tesseract(image):
     return pytesseract.image_to_string(image)
