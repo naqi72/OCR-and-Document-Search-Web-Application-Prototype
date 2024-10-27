@@ -2,14 +2,10 @@ import streamlit as st
 import easyocr
 import numpy as np
 from PIL import Image
-from transformers import pipeline
-import re  # For finding and highlighting keywords
+import re 
 
 # Load EasyOCR Reader for Hindi and English
 reader = easyocr.Reader(['hi', 'en'],gpu=False)
-
-# Initialize Hugging Face Transformers question-answering pipeline
-qa_pipeline = pipeline('question-answering', model='distilbert-base-cased-distilled-squad', framework='pt')
 
 # Function to perform OCR on the image
 def ocr_image(uploaded_image):
