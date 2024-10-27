@@ -1,9 +1,8 @@
 # OCR and Document Search Web Application
 
 ## Project Overview
-This project is a web-based prototype that demonstrates the ability to perform Optical Character Recognition (OCR) on an uploaded image containing text in both Hindi and English. The application allows users to upload an image, choose between two OCR models (EasyOCR or Tesseract), extract text, and perform a keyword search within the extracted text.
 
-The application is built using Streamlit for the frontend and combines EasyOCR and Tesseract as the backend OCR engines.
+This web application enables users to extract text from images and perform keyword searches within the extracted text. Built with **Streamlit** and **EasyOCR**, it supports **Hindi and English** languages. Users can upload an image, view extracted text, and highlight keywords to streamline information discovery.
 
 ## Setup Instructions
 
@@ -24,34 +23,26 @@ The application is built using Streamlit for the frontend and combines EasyOCR a
     streamlit run app.py
     ```
 
-## Deployment
-The application is deployed at: [LIVE URL HERE]
-
 ## Features
--Upload images in popular formats like PNG, JPEG, JPG.
 
--Choose between EasyOCR and Tesseract models for text extraction.
+- **Text Extraction (OCR)**: Upload a JPEG or PNG image, and the app extracts all readable text.
+ 
+- **Keyword Search and Highlighting**: Enter a keyword to search within the extracted text, which will be highlighted for better readability.
+ 
+- **User-Friendly Interface**: Streamlit-based UI for seamless interaction.
 
--Extract text in both Hindi and English.
 
--Once the text is extracted from the image, it is displayed clearly on the page for easy reading.
-
--Search for specific keywords in the extracted text, with highlighted results.
-
--Download extracted text as a plain text file, making it easy to save or share.
-
--Deployed online for public access.
-
-###  Tech Stack:
+##  Tech Stack:
 - **Streamlit**: Fast and modern web framework for creating data-driven apps.
  
 - **EasyOCR**: Optical Character Recognition library supporting multiple languages
-
-- **Huggingface Transformers**: Pre-trained models for NLP, specifically used here for keyword searches.
  
-- **Pillow**: Image processing capabilities to handle uploaded image files.
+- **Pillow (PIL)**: Image processing capabilities to handle uploaded image files.
  
 - **NumPy**: For image conversion and array manipulation.
+
+- **Regular Expressions (re)**: Enables efficient keyword highlighting.
+
 
 
 
